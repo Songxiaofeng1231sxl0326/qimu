@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>工厂管理表</title>
+
+</head>
+<link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+<script th:src="@{/js/jquery-1.12.4.js}"></script>
+<script th:src="@{/layui/layui.js}"></script>
+<body onload="provincesGet()">
+<!--表格-->
+表格
+<table class="layui-hide" id="factory" lay-filter="factory" ></table>
+
+<br/>
+<!--添加考核指标-->
+<fieldset class="layui-elem-field">
+    <legend>工厂管理 - 添加工厂</legend>
+    <div class="layui-field-box">
+        <form form class="layui-form" th:action="@{/factory/addObject}" method="post" enctype="multipart/form-data">
+            <div class="layui-form-item" style="margin-left: 20px; height: 40px; margin-top: 20px">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="margin-top: 10px">工厂logo</label>
+
+                    <input type="file" name="pfile"/>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Factory_name" required  lay-verify="required" placeholder="请输入工厂名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">主要产品标签</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Factory_label" required  lay-verify="required" placeholder="请输入主要产品标签，用空格隔开" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">代工模式</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Foundry_pattern" required  lay-verify="required" placeholder="请输入代工模式" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">打样能力</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Proofing_ability" required  lay-verify="required" placeholder="是否支持自主打样能力" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">质检类型</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Quality_inspectiontype" required  lay-verify="required" placeholder="请输入质检类型" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">出口/内销</label>
+                <div class="layui-input-block">
+                    <input type="text" name="FORK" required  lay-verify="required" placeholder="请选择出口/内销" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生产工艺</label>
+                <div class="layui-input-block">
+                    <input type="text" name="manufacturing_technique" required  lay-verify="required" placeholder="生产工艺" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工场面积</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Factory_area" required  lay-verify="required" placeholder="请输入工场面积" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="employees" required  lay-verify="required" placeholder="请输入员工数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="equipment" required  lay-verify="required" placeholder="请输入设备数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生产工人数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Productions" required  lay-verify="required" placeholder="请输入生产工人数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年均新款</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Annual_new" required  lay-verify="required" placeholder="请输入年均新款" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年生产能力</label>
+                <div class="layui-input-block">
+                    <input type="text" name="yearly_capacity" required  lay-verify="required" placeholder="请输入年生产能力" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">自有品牌数量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="brands" required  lay-verify="required" placeholder="请输入自有品牌数量" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">专利号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Patent_id" required  lay-verify="required" placeholder="请输入专利号，用空格隔开" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-left: 20px; height: 40px; margin-top: 20px">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="margin-top: 10px">企业资质/经营许可证</label>
+
+                    <input type="file" name="pfile1"/>
+
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-left: 20px; height: 40px; margin-top: 20px">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="margin-top: 10px">产品体系认证</label>
+
+                    <input type="file" name="pfile2"/>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所在地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="adress" required  lay-verify="required" placeholder="请输入所在地" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">详细地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="addressname4" required  lay-verify="required" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂简介</label>
+                <div class="layui-input-block">
+                    <input type="text" name="factory_profile" required  lay-verify="required" placeholder="请输入工厂简介" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">代理招商</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Agent_investment" required  lay-verify="required" placeholder="请输入代理招商" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <input type="hidden" name="Admin_id" th:value="1">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+
+
+<script>
+
+
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        laydate.render({
+            elem: '#da'
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <!--<button class="layui-btn layui-btn-sm"><a th:href="@{/aduitlog/tolook}">查看直观图</a></button>-->
+
+</script>
+
+<!--
+这个错误是thymeleaf模板加载失败，一般情况下在后台返回json数据是，页面加载时 ，解析失败
+    第一种解决方式：
+    columns:[[    进行换行处理
+    第二种就是在<script type="text/javascript" >  加上 th:inline="none"
+    <script type="text/javascript"  th:inline="none">
+   -->
+
+<script th:inline="none">
+    layui.use([ 'element', 'table', 'layer', 'form' ,'laydate'], function () {
+        var element = layui.element;
+        var layer = layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var laydate = layui.laydate;
+
+
+        table.render({
+            elem: '#factory'
+            , url: '/factory/list'
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                , layEvent: 'LAYTABLE_TIPS'
+                , icon: 'layui-icon-tips'
+            }]
+            , limit: 10//默认为10
+            , title: '工厂录入数据表'
+            , cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'Factory_id', title: '编号', fixed: 'left', unresize: true, sort: true, align: 'center'}
+                , {field: 'name', title: '工厂名称', edit: 'text', align: 'center'}
+                ,{field:'logo', title:'工厂logo', width:100 ,align:'center',templet:
+                        function (d) {
+                            return '<div><img src='+d.logo+'></div>'
+                        }
+                }
+                , {field: 'address', title: '工厂地址', edit: 'text', align: 'center'}
+                , {field: 'Admin_id', title: '录入员编号', edit: 'text', align: 'center'}
+                , {field: 'state', title: '状态', edit: 'text', align: 'center'}
+                , {field: 'Create_time', title: '创建时间', edit: 'text', align: 'center',templet:"<div>{{layui.util.toDateString(d.aduitDate, 'yyyy-MM-dd hh:mm:ss')}}</div> "}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', align: 'center'}
+            ]]
+            , page: true
+
+        });
+
+
+// 工具栏事件
+        table.on('toolbar(factory)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    break;
+            };
+        });
+
+
+
+        //监听行工具事件
+        table.on('tool(factory)', function (obj) {
+            //选中行数据
+            var data = obj.data;
+            //data['id'] 里面的id是字段名想获取哪个写哪个
+            //console.log(data['id']);
+            var cid = data['Factory_id'];
+
+            console.log()
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    $.ajax({
+                        url: '/factory/del',
+                        data: {id: cid},
+                        dataType: "json"
+                    });
+                    obj.del();
+                    layer.close(index);
+                });
+
+            }
+
+        });
+
+    });
+
+
+</script>
+
+<script>
+   //加载省
+    function provincesGet(){
+        citiesGet();
+        $.ajax({
+            url: '/address/provinces',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#etp1').append(new Option(item.province,item.provinceid));// 下拉菜单里添加元素
+                    // var options=$("#numbers option:selected"); //获取选中的项
+                    // alert(options.val());
+                });
+
+                layui.form.render("select");
+                // alert(options)
+
+
+            }
+        })
+    }
+   // function getcityid(){
+   //     var objS = document.getElementById("etp2");
+   //     var cityid = objS.options[objS.selectedIndex].cityid;
+   //     alert(cityid);
+   // }
+   // // var  provinceid;
+   // function getprovinceid(){
+   //     var objS = document.getcityid("etp1");
+   //     var provinceid = objS.options[objS.selectedIndex].provinceid;
+   //     // provinceid = objS.options[objS.selectedIndex].provinceid;
+   //     alert(provinceid);
+   //      citiesGet(provinceid);
+   //
+   // }
+   //
+   //
+   //
+   //
+   //
+   //
+   // //加载市
+   //  function citiesGet(provinceid) {
+   //      areasGet();
+   //      $.ajax({
+   //          url: '/address/cities',
+   //          dataType: 'json',
+   //          id: provinceid,
+   //          success: function (data) {
+   //              $.each(data.data, function (index, item) {
+   //                  $('#etp2').append(new Option(item.city, item.cityid));// 下拉菜单里添加元素
+   //              });
+   //              var options = select.options;
+   //              // alert(data.all)
+   //              layui.form.render("select");
+   //          }
+   //      })
+   //  }
+   //  //加载县/地区
+   //  function areasGet() {
+   //
+   //      $.ajax({
+   //          url: '/address/areas',
+   //          dataType: 'json',
+   //          type: 'post',
+   //          success: function (data) {
+   //              $.each(data.data, function (index, item) {
+   //                  $('#etp3').append(new Option(item.area, item.areaid));// 下拉菜单里添加元素
+   //                  var options = $("#ID option:selected");//获取选中的值
+   //              });
+   //              layui.form.render("select");
+   //
+   //          }
+   //      })
+   //  }
+</script>
+
+</body>
+</html>
